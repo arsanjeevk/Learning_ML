@@ -7,6 +7,7 @@ Video Link : https://youtu.be/lV_Z4HbNAx0
 In machine learning, many algorithms—especially linear models like **Linear Regression**, **Logistic Regression**, and **SVM**—perform optimally when the input features follow a **Normal (Gaussian) Distribution**. When your data is skewed, a **Power Transformer** is a sophisticated tool used to map that data into a normal distribution by applying power-based mathematical functions.
 
 
+
 ## 1. What is a Power Transformer?
 A **Power Transformer** belongs to the family of parametric, monotonic transformations. Unlike simple function transformations (like log or square root) which use a fixed formula, a Power Transformer searches for an optimal exponent—known as **Lambda ($\lambda$)**—to transform your data into a "Gaussian-like" shape.
 
@@ -15,8 +16,8 @@ Imagine your data distribution is a lump of clay. The Power Transformer acts as 
 
 ```mermaid
 graph LR
-    A[Non-Normal Data <br> (Skewed)] --> B{Power Transformer}
-    B --> |Finds Optimal Lambda| C[Normal Distribution <br> (Gaussian)]
+    A[Non-Normal Data (Skewed)] --> B{Power Transformer}
+    B -->|Finds Optimal Lambda| C[Normal Distribution (Gaussian)]
 ```
 
 > **Key Takeaway:** While standard function transforms use a fixed "one-size-fits-all" approach, Power Transformers are **adaptive**; they find the best mathematical "fit" specifically for your dataset.
@@ -41,6 +42,7 @@ The Yeo-Johnson transformation is a modern variation of Box-Cox designed to over
 | **Supports Zero/Negative Data** | No | Yes |
 | **Search Method** | MLE or Bayesian | MLE or Bayesian |
 | **Primary Goal** | Minimize Variance/Skew | Minimize Variance/Skew |
+
 
 
 ## 3. How the Algorithm "Learns" Lambda
@@ -73,6 +75,7 @@ print(pt.lambdas_)
 ```
 
 
+
 ## 5. Performance Impact
 In the lecture demonstration using a **Concrete Strength dataset**, applying Power Transformations resulted in a significant boost in model performance:
 *   **Without Transformation:** $R^2$ Score was approximately **0.62**.
@@ -80,6 +83,7 @@ In the lecture demonstration using a **Concrete Strength dataset**, applying Pow
 
 ### **Visual Validation (QQ Plots)**
 To confirm the transformation worked, always compare the **Before** and **After** states using a **QQ Plot**. If the transformation was successful, the data points in the "After" plot will align much more closely with the 45-degree diagonal line.
+
 
 
 ## 6. Summary: When to Use Power Transformers
