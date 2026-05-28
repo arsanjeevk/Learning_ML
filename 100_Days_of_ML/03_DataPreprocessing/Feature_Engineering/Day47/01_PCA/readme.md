@@ -57,11 +57,17 @@ When simple feature selection isn't enough—because multiple features are equal
 3.  **Principal Component 1 (PC1):** This new axis becomes the first and most important feature. It captures the most variance.
 4.  **Principal Component 2 (PC2):** This axis is perpendicular to PC1 and captures the remaining variance.
 
-```mermaid
-graph TD
-    A[Original Data: X and Y] --> B[Find direction of Max Variance]
-    B --> C[Rotate Axes to align with this direction]
-    C --> D[Result: PC1 (Max Variance) and PC2 (Remaining Variance)]
+```
+Original Data (X, Y)
+        |
+        v
+Find direction of maximum variance
+        |
+        v
+Rotate axes to align with that direction
+        |
+        v
+PC1 (Max Variance)  +  PC2 (Remaining Variance)
 ```
 
 > [!NOTE]
