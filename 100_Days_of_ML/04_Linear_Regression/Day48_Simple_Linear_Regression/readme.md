@@ -39,7 +39,7 @@ Imagine a dataset from a college placement cell containing two columns:
 **The Goal:** Build a model that can predict a student's package if their CGPA is provided.
 
 ### **Real-World Complexity**
-Real-world data is rarely "perfectly linear" (forming a perfectly straight line). Instead, it is **"Soft Linear"**. This occurs because of **Stochastic Errors**—unpredictable factors like a student’s interview performance or the specific company’s hiring budget that cannot be quantified by a simple formula.
+Real-world data is rarely "perfectly linear" (forming a perfectly straight line). Instead, it is **"Sort of Linear"**. This occurs because of **Stochastic Errors**—unpredictable factors like a student’s interview performance or the specific company’s hiring budget that cannot be quantified by a simple formula.
 
 
 ## 3. The Geometry of Linear Regression
