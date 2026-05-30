@@ -81,21 +81,34 @@ $$\bar{y} - m\bar{x} - b = 0$$
 
 
 ### **3. Deriving the Slope ($m$)**
-Next, we take the **partial derivative** of the loss function with respect to $m$ and set it to zero:
+Before differentiating for $m$, we substitute the expression for $b$ ($b = \bar{y} - m\bar{x}$) back into the original error function to simplify the calculation:
 
-$$\frac{\partial E}{\partial m} = \sum_{i=1}^{n} 2(y_i - mx_i - b) \cdot \frac{\partial}{\partial m}(y_i - mx_i - b)$$
-$$\frac{\partial E}{\partial m} = \sum_{i=1}^{n} 2(y_i - mx_i - b)(-x_i) = 0$$
+$$E = \sum_{i=1}^{n} [y_i - mx_i - (\bar{y} - m\bar{x})]^2$$
 
-Dividing by $-2$:
+Grouping the terms:
 
-$$\sum (y_i - mx_i - b)x_i = 0$$
+$$E = \sum_{i=1}^{n} [(y_i - \bar{y}) - m(x_i - \bar{x})]^2$$
 
-Now, substitute the previously derived value of $b = \bar{y} - m\bar{x}$ into the equation:
 
-$$\sum (y_i - mx_i - (\bar{y} - m\bar{x}))x_i = 0$$
-$$\sum (y_i - \bar{y} - m(x_i - \bar{x}))x_i = 0$$
+Now we take the partial derivative of this substituted error function with respect to $m$ and set it to zero:
 
-By rearranging the terms and solving for $m$, we arrive at the final OLS formula for the slope:
+$$\frac{\partial E}{\partial m} = \sum_{i=1}^{n} 2[(y_i - \bar{y}) - m(x_i - \bar{x})] \cdot \frac{\partial}{\partial m}[(y_i - \bar{y}) - m(x_i - \bar{x})] = 0$$
+
+$$\frac{\partial E}{\partial m} = \sum_{i=1}^{n} 2[(y_i - \bar{y}) - m(x_i - \bar{x})][-(x_i - \bar{x})] = 0$$
+
+Dividing by $-2$ gives:
+
+$$\sum_{i=1}^{n} [(y_i - \bar{y}) - m(x_i - \bar{x})](x_i - \bar{x}) = 0$$
+
+Expanding the summation:
+
+$$\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x}) - \sum_{i=1}^{n} m(x_i - \bar{x})^2 = 0$$
+
+Isolating the term with $m$:
+
+$$\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x}) = m \sum_{i=1}^{n} (x_i - \bar{x})^2$$
+
+Dividing to reach the final formula for $m$:
 
 **$$m = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}$$**
 
