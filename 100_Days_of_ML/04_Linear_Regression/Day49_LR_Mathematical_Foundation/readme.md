@@ -112,7 +112,7 @@ def fit(self, X_train, y_train):
         
     self.m = num / den
     self.b = y_mean - (self.m * x_mean)
-```.
+```
 
 ### **The `predict` Method**
 Once $m$ and $b$ are known, predicting for a new input $x$ is a simple linear calculation.
@@ -120,7 +120,95 @@ Once $m$ and $b$ are known, predicting for a new input $x$ is a simple linear ca
 ```python
 def predict(self, X_test):
     return (self.m * X_test) + self.b
-```.
+```
+
+
+
+
+### Derivation
+
+To derive the optimal values for the slope (**$m$**) and the intercept (**$b$**) in Simple Linear Regression, we use a method called **Ordinary Least Squares (OLS)**. The goal is to find a "Best Fit Line" ($y = mx + b$) that minimizes the total error between the actual data points and the line.
+
+### **1. Define the Loss Function**
+The error for any single point is the difference between the **actual value** ($y_i$) and the **predicted value** ($\hat{y}_i$). To ensure all errors are positive and to penalize larger errors, we use the **Sum of Squared Errors (SSE)** as our loss function, denoted as $E$:
+
+$$E = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
+
+Substituting the line equation $\hat{y}_i = mx_i + b$ into the loss function:
+
+$$E(m, b) = \sum_{i=1}^{n} (y_i - (mx_i + b))^2$$
+$$E(m, b) = \sum_{i=1}^{n} (y_i - mx_i - b)^2$$
+
+---
+
+### **2. Deriving the Intercept ($b$)**
+To find the value of $b$ that minimizes the error, we take the **partial derivative** of the loss function with respect to $b$ and set it to zero:
+
+$$\frac{\partial E}{\partial b} = \sum_{i=1}^{n} 2(y_i - mx_i - b) \cdot \frac{\partial}{\partial b}(y_i - mx_i - b)$$
+$$\frac{\partial E}{\partial b} = \sum_{i=1}^{n} 2(y_i - mx_i - b)(-1) = 0$$
+
+Dividing by $-2$ and distributing the summation:
+
+$$\sum y_i - \sum mx_i - \sum b = 0$$
+$$\sum y_i - m\sum x_i - nb = 0$$
+
+Now, divide the entire equation by $n$ (the total number of observations):
+
+$$\frac{\sum y_i}{n} - m\frac{\sum x_i}{n} - \frac{nb}{n} = 0$$
+
+Since $\frac{\sum y_i}{n} = \bar{y}$ (mean of $y$) and $\frac{\sum x_i}{n} = \bar{x}$ (mean of $x$):
+
+$$\bar{y} - m\bar{x} - b = 0$$
+**$$b = \bar{y} - m\bar{x}$$**
+
+---
+
+### **3. Deriving the Slope ($m$)**
+Next, we take the **partial derivative** of the loss function with respect to $m$ and set it to zero:
+
+$$\frac{\partial E}{\partial m} = \sum_{i=1}^{n} 2(y_i - mx_i - b) \cdot \frac{\partial}{\partial m}(y_i - mx_i - b)$$
+$$\frac{\partial E}{\partial m} = \sum_{i=1}^{n} 2(y_i - mx_i - b)(-x_i) = 0$$
+
+Dividing by $-2$:
+
+$$\sum (y_i - mx_i - b)x_i = 0$$
+
+Now, substitute the previously derived value of $b = \bar{y} - m\bar{x}$ into the equation:
+
+$$\sum (y_i - mx_i - (\bar{y} - m\bar{x}))x_i = 0$$
+$$\sum (y_i - \bar{y} - m(x_i - \bar{x}))x_i = 0$$
+
+By rearranging the terms and solving for $m$, we arrive at the final OLS formula for the slope:
+
+**$$m = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}$$**
+
+---
+
+### **Summary of Final Formulas**
+For any dataset, first calculate $m$ and then use it to find $b$:
+
+1.  **Slope ($m$):**
+    $$m = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}$$
+2.  **Intercept ($b$):**
+    $$b = \bar{y} - m\bar{x}$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 > [!TIP]
 > **Key Takeaways**
