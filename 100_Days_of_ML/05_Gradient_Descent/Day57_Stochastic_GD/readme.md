@@ -9,7 +9,7 @@ Video Link: https://www.youtube.com/watch?v=V7KBAa_gh4c&list=PLKnIA16_Rmvbr7zKYQ
 
 
 ## 1. Motivation: The Problem with Batch GD
-In **Batch Gradient Descent**, calculating the derivative of the loss function requires a summation over all $m$ rows in the dataset.
+In **Batch Gradient Descent**, calculating the derivative of the loss function requires a summation over all $n$ rows in the dataset.
 
 *   **Computational Cost:** For a dataset with $10^5$ rows, 100 columns, and 1000 epochs, BGD requires roughly $10^{10}$ derivative calculations, making it extremely slow.
 *   **Hardware Constraints:** BGD requires the entire feature matrix to be loaded into **RAM** simultaneously for vectorization. If the dataset is too large (e.g., several GBs), it can lead to system memory errors.
@@ -48,36 +48,7 @@ graph LR
 > *   The randomness helps the algorithm reach the vicinity of the solution much quicker.
 
 
-## 3. Mathematical Derivation
-To implement SGD, we derive the update rules for the **intercept** ($\beta_0$) and **coefficients** ($\beta_j$) for a single observation $i$.
-
-### **Step 1: The Loss Function for a Single Point**
-In BGD, we minimize the mean of all squared errors. In SGD, we focus on the squared error of a **single point**:
-$$E_i = (y_i - \hat{y}_i)^2$$
-Where the prediction $\hat{y}_i$ is:
-$$\hat{y}_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_nx_{in}$$
-
-### **Step 2: Partial Derivative for Intercept ($\beta_0$)**
-We apply the chain rule to the single-point error:
-1.  **Power Rule:** $\frac{\partial E_i}{\partial \beta_0} = 2(y_i - \hat{y}_i)^1$.
-2.  **Internal Derivative:** Multiply by the derivative of $(y_i - \beta_0 - \dots)$ with respect to $\beta_0$, which is $-1$.
-3.  **Result:** 
-$$\frac{\partial E_i}{\partial \beta_0} = -2(y_i - \hat{y}_i)$$
-
-### **Step 3: Partial Derivative for Coefficients ($\beta_j$)**
-For any feature $j$:
-1.  **Power Rule:** $\frac{\partial E_i}{\partial \beta_j} = 2(y_i - \hat{y}_i)$.
-2.  **Internal Derivative:** Multiply by the derivative of $(y_i - \dots - \beta_jx_{ij} - \dots)$ with respect to $\beta_j$, which is $-x_{ij}$.
-3.  **Result:**
-$$\frac{\partial E_i}{\partial \beta_j} = -2(y_i - \hat{y}_i)x_{ij}$$
-
-### **Step 4: The Parameter Update Rules**
-In each step, the parameters are updated using the learning rate $\eta$:
-*   **Intercept Update:** $\beta_0^{(new)} = \beta_0^{(old)} - \eta \cdot [-2(y_i - \hat{y}_i)]$.
-*   **Coefficient Update:** $\beta_j^{(new)} = \beta_j^{(old)} - \eta \cdot [-2(y_i - \hat{y}_i)x_{ij}]$.
-
-
-## 4. Advanced Concepts and Optimization
+## 3. Advanced Concepts and Optimization
 
 ### **Non-Convex Functions and Local Minima**
 In complex models (like neural networks), the loss function may have multiple "holes" called **local minima**.
